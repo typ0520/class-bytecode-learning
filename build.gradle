@@ -29,3 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+println compileJava.options
+sourceCompatibility = "1.6"
+targetCompatibility = "1.6"
+
