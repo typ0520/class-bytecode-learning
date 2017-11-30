@@ -1,94 +1,16 @@
 package com.example.cbl;
 
+import com.example.cbl.contant.Constant;
 import org.fenixsoft.clazz.TestClass;
-
 import java.io.*;
 import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by tong on 2017/11/29.
  */
 public class MainClass {
-    /**
-     * UTF-8编码的字符串
-     */
-    private static final int CONSTANT_Utf8_info = 1;
-    /**
-     * 整型字面量
-     */
-    private static int CONSTANT_Integer_info = 3;
-    /**
-     * 浮点型字面量
-     */
-    private static int CONSTANT_Float_info = 4;
-    /**
-     * 长整型字面量
-     */
-    private static int CONSTANT_Long_info = 5;
-    /**
-     * 双精度浮点型字面量
-     */
-    private static int CONSTANT_Double_info = 6;
-    /**
-     * 类或者接口的符号引用
-     */
-    private static int CONSTANT_Class_info = 7;
-    /**
-     * 字符串类型字面量
-     */
-    private static int CONSTANT_String_info = 8;
-    /**
-     * 字段的符号引用
-     */
-    private static int CONSTANT_Fieldres_info = 9;
-    /**
-     * 类中方法的符号引用
-     */
-    private static int CONSTANT_Methodref_info = 10;
-    /**
-     * 接口中方法的符号引用
-     */
-    private static int CONSTANT_InterfaceMethodref_info = 11;
-    /**
-     * 字段或方法的部分符号引用
-     */
-    private static int CONSTANT_NameAndType_info = 12;
-    /**
-     * 表示方法句柄
-     */
-    private static int CONSTANT_MethodHandle_info = 15;
-    /**
-     * 标识方法类型
-     */
-    private static int CONSTANT_MethodType_info = 16;
-    /**
-     * 表示一个动态方法调用点
-     */
-    private static int CONSTANT_InvokeDynamic_info = 18;
-
-    private static final Map<Integer,String> CONSTANT_DESC_MAP = new HashMap<>();
-
-    static {
-        CONSTANT_DESC_MAP.put(CONSTANT_Utf8_info,"Utf8");
-        CONSTANT_DESC_MAP.put(CONSTANT_Integer_info,"Integer");
-        CONSTANT_DESC_MAP.put(CONSTANT_Float_info,"Float");
-        CONSTANT_DESC_MAP.put(CONSTANT_Long_info,"Long");
-        CONSTANT_DESC_MAP.put(CONSTANT_Double_info,"Double");
-        CONSTANT_DESC_MAP.put(CONSTANT_Class_info,"Class");
-        CONSTANT_DESC_MAP.put(CONSTANT_String_info,"String");
-        CONSTANT_DESC_MAP.put(CONSTANT_Fieldres_info,"Fieldres");
-        CONSTANT_DESC_MAP.put(CONSTANT_Methodref_info,"Methodref");
-        CONSTANT_DESC_MAP.put(CONSTANT_InterfaceMethodref_info,"InterfaceMethodref");
-        CONSTANT_DESC_MAP.put(CONSTANT_NameAndType_info,"NameAndType");
-        CONSTANT_DESC_MAP.put(CONSTANT_MethodHandle_info,"MethodHandle");
-        CONSTANT_DESC_MAP.put(CONSTANT_MethodType_info,"MethodType");
-        CONSTANT_DESC_MAP.put(CONSTANT_InvokeDynamic_info,"InvokeDynamic");
-    }
-
     public static void main(String[] args) throws Exception {
         byte[] classBytes = getClassBytes(TestClass.class);
         int offset = 0;
@@ -117,8 +39,8 @@ public class MainClass {
         while ((constantPoolCount - 1) > 0) {
             int tag = readUnsignedByte(classBytes,offset);
             offset += 1;
-            System.out.println("#" + index + " = " + CONSTANT_DESC_MAP.get(tag));
-            if (tag == CONSTANT_Utf8_info) {
+            System.out.println("#" + index + " = " + Constant.getContantDesc(tag));
+            if (tag == Constant.CONSTANT_Utf8_info) {
                 int length = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 byte[] bytes = readBytes(classBytes,offset,length);
@@ -126,72 +48,72 @@ public class MainClass {
 
                 System.out.println("  读取到了字符串常量: " + new String(bytes));
             }
-            else if (tag == CONSTANT_Integer_info) {
+            else if (tag == Constant.CONSTANT_Integer_info) {
                 byte[] bytes = readBytes(classBytes,offset,4);
                 offset += 4;
             }
-            else if (tag == CONSTANT_Float_info) {
+            else if (tag == Constant.CONSTANT_Float_info) {
                 byte[] bytes = readBytes(classBytes,offset,4);
                 offset += 4;
             }
-            else if (tag == CONSTANT_Long_info) {
+            else if (tag == Constant.CONSTANT_Long_info) {
                 byte[] highBytes = readBytes(classBytes,offset,4);
                 offset += 4;
 
                 byte[] lowBytes = readBytes(classBytes,offset,4);
                 offset += 4;
             }
-            else if (tag == CONSTANT_Double_info) {
+            else if (tag == Constant.CONSTANT_Double_info) {
                 byte[] highBytes = readBytes(classBytes,offset,4);
                 offset += 4;
 
                 byte[] lowBytes = readBytes(classBytes,offset,4);
                 offset += 4;
             }
-            else if (tag == CONSTANT_Class_info) {
+            else if (tag == Constant.CONSTANT_Class_info) {
                 int nameIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 System.out.println("  nameIndex: " + nameIndex);
             }
-            else if (tag == CONSTANT_String_info) {
+            else if (tag == Constant.CONSTANT_String_info) {
                 int stringIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_Fieldres_info) {
+            else if (tag == Constant.CONSTANT_Fieldres_info) {
                 int classIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 int nameAndTypeIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_Methodref_info) {
+            else if (tag == Constant.CONSTANT_Methodref_info) {
                 int classIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 int nameAndTypeIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_InterfaceMethodref_info) {
+            else if (tag == Constant.CONSTANT_InterfaceMethodref_info) {
                 int classIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 int nameAndTypeIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_NameAndType_info) {
+            else if (tag == Constant.CONSTANT_NameAndType_info) {
                 int nameIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 int descriptorIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_MethodHandle_info) {
+            else if (tag == Constant.CONSTANT_MethodHandle_info) {
                 int referenceKind = readUnsignedByte(classBytes,1);
                 offset += 1;
                 int referenceIndex = readUnsignedShort(classBytes,2);
                 offset += 2;
             }
-            else if (tag == CONSTANT_MethodType_info) {
+            else if (tag == Constant.CONSTANT_MethodType_info) {
                 int descriptorIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
             }
-            else if (tag == CONSTANT_InvokeDynamic_info) {
+            else if (tag == Constant.CONSTANT_InvokeDynamic_info) {
                 int bootstrapMethodAttrIndex = readUnsignedShort(classBytes,offset);
                 offset += 2;
                 int nameAndTypeIndex = readUnsignedShort(classBytes,offset);
@@ -230,8 +152,78 @@ public class MainClass {
 
         while (fieldsCount > 0) {
             int fieldAccessFlags = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            printlnAccessFlags(fieldAccessFlags);
 
+            int nameIndex = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("  field-nameIndex: " + nameIndex);
+            int descriptorIndex = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            int attributesCount = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("  field-attributesCount: " + attributesCount);
+
+            while (attributesCount > 0) {
+                int attributeNameIndex = readUnsignedShort(classBytes,offset);
+                offset += 2;
+                long attributeLength = readUnsignedInt(classBytes,offset);
+                offset += 4;
+
+                //跳过字段的附加属性
+                offset += attributeLength;
+
+                attributesCount--;
+            }
             fieldsCount--;
+        }
+
+        int methodsCount = readUnsignedShort(classBytes,offset);
+        offset += 2;
+        System.out.println("methodsCount: " + methodsCount);
+
+        while (methodsCount > 0) {
+            int methodAccessFlags = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            printlnAccessFlags(methodAccessFlags);
+
+            int nameIndex = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("  method-nameIndex: " + nameIndex);
+            int descriptorIndex = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("  method-descriptorIndex: " + descriptorIndex);
+            int attributesCount = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("  method-attributesCount: " + attributesCount);
+
+            while (attributesCount > 0) {
+                int attributeNameIndex = readUnsignedShort(classBytes,offset);
+                offset += 2;
+
+                long attributeLength = readUnsignedInt(classBytes,offset);
+                offset += 4;
+
+
+                //跳过方法的附加属性
+                offset += attributeLength;
+
+                attributesCount--;
+            }
+
+            methodsCount--;
+        }
+
+        int attributesCount = readUnsignedShort(classBytes,offset);
+        offset += 2;
+        System.out.println("class-attributesCount: " + attributesCount);
+
+        while (attributesCount > 0) {
+            int attributeNameIndex = readUnsignedShort(classBytes,offset);
+            offset += 2;
+            System.out.println("class-attributeNameIndex: " + attributeNameIndex);
+
+            attributesCount--;
         }
     }
 
@@ -251,6 +243,12 @@ public class MainClass {
         }
         if (Modifier.isFinal(accessFlags)) {
             sb.append("| final");
+        }
+        if (Modifier.isStatic(accessFlags)) {
+            sb.append("| static");
+        }
+        if (Modifier.isVolatile(accessFlags)) {
+            sb.append("| volatile");
         }
 
         System.out.println(accessFlags + " " + sb.toString());

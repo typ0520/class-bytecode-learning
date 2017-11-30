@@ -8,9 +8,9 @@ import java.io.Serializable;
 public final class TestClass implements Serializable,Runnable {
     //public static final long XXX = 100L;
 
-    private int m;
-    private int m1;
-    private int m2;
+    private static volatile int m;
+    private final int m1 = 2;
+    private final int m2 = 3;
 
     public int inc() {
         return m + 1;
