@@ -1,21 +1,21 @@
 package com.tong.javap.contant;
 
 import com.tong.javap.utils.ByteCodeStream;
+
 import java.util.List;
 
 /**
  * Created by tong on 2017/12/1.
  */
-public class IntegerConstant extends Constant {
-    private int value;
-
-    public IntegerConstant() {
-        super(Constant.CONSTANT_Integer_info, "Integer");
+public class MethodrefConstant extends Constant {
+    public MethodrefConstant() {
+        super(Constant.CONSTANT_Methodref_info, "Methodref");
     }
 
     @Override
     public void preHandle(ByteCodeStream stream) {
-        this.value = stream.readInt();
+        int classIndex = stream.readUnsignedShort();
+        int nameAndTypeIndex = stream.readUnsignedShort();
     }
 
     @Override

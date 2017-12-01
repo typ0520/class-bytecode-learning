@@ -52,7 +52,11 @@ public class ByteCodeStream {
      * @return
      */
     public long readUnsignedInt() {
-        long result = ((long) ((buffer[offset] & 0xFF) << 24) | ((buffer[offset + 1] & 0xFF) << 16) | ((buffer[offset + 2] & 0xFF) << 8) | (buffer[offset + 3] & 0xFF)) & 0xffffffffL;
+        return ((long)(readInt())) & 0xffffffffL;
+    }
+
+    public int readInt() {
+        int result = ((buffer[offset] & 0xFF) << 24) | ((buffer[offset + 1] & 0xFF) << 16) | ((buffer[offset + 2] & 0xFF) << 8) | (buffer[offset + 3] & 0xFF);
         offset += 4;
         return result;
     }

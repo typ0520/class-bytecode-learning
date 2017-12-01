@@ -6,16 +6,17 @@ import java.util.List;
 /**
  * Created by tong on 2017/12/1.
  */
-public class IntegerConstant extends Constant {
-    private int value;
+public class FloatConstant extends Constant {
+    private float value;
 
-    public IntegerConstant() {
-        super(Constant.CONSTANT_Integer_info, "Integer");
+    public FloatConstant() {
+        super(Constant.CONSTANT_Float_info, "Float");
     }
 
     @Override
     public void preHandle(ByteCodeStream stream) {
-        this.value = stream.readInt();
+        //byte[] bytes = stream.readBytes(4);
+        this.value = Float.intBitsToFloat(stream.readInt());
     }
 
     @Override

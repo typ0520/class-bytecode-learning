@@ -1,12 +1,14 @@
 package com.tong.javap.contant;
 
+import com.tong.javap.utils.ByteCodeStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by tong on 2017/11/30.
  */
-public class Constant {
+public abstract class Constant {
     /**
      * UTF-8编码的字符串
      */
@@ -76,7 +78,7 @@ public class Constant {
         CONSTANT_DESC_MAP.put(CONSTANT_String_info,"String");
         CONSTANT_DESC_MAP.put(CONSTANT_Fieldres_info,"Fieldres");
         CONSTANT_DESC_MAP.put(CONSTANT_Methodref_info,"Methodref");
-        CONSTANT_DESC_MAP.put(CONSTANT_InterfaceMethodref_info,"InterfaceMethodref");
+        CONSTANT_DESC_MAP.put(CONSTANT_InterfaceMethodref_info,"InterfaceMethodrefConstant");
         CONSTANT_DESC_MAP.put(CONSTANT_NameAndType_info,"NameAndType");
         CONSTANT_DESC_MAP.put(CONSTANT_MethodHandle_info,"MethodHandle");
         CONSTANT_DESC_MAP.put(CONSTANT_MethodType_info,"MethodType");
@@ -85,6 +87,7 @@ public class Constant {
     
     private final int tag;
     private final String desc;
+    private boolean ready;
 
     public Constant(int tag, String desc) {
         this.tag = tag;
@@ -95,11 +98,23 @@ public class Constant {
         return tag;
     }
 
-    public String getContantDesc() {
-        return getContantDesc(getTag());
+    public String getDesc() {
+        return desc;
     }
 
-    public static String getContantDesc(int tag) {
+    public abstract void preHandle(ByteCodeStream stream);
+
+    public abstract void postHandle(List<Constant> constantList);
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    public static String getDesc(int tag) {
         return CONSTANT_DESC_MAP.get(tag);
     }
 }

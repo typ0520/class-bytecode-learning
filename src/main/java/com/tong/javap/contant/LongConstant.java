@@ -6,16 +6,16 @@ import java.util.List;
 /**
  * Created by tong on 2017/12/1.
  */
-public class IntegerConstant extends Constant {
-    private int value;
-
-    public IntegerConstant() {
-        super(Constant.CONSTANT_Integer_info, "Integer");
+public class LongConstant extends Constant {
+    public LongConstant() {
+        super(Constant.CONSTANT_Long_info, "Long");
     }
 
     @Override
     public void preHandle(ByteCodeStream stream) {
-        this.value = stream.readInt();
+        byte[] highBytes = stream.readBytes(4);
+        byte[] lowBytes = stream.readBytes(4);
+
     }
 
     @Override
