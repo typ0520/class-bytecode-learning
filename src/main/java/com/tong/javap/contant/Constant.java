@@ -84,9 +84,11 @@ public class Constant {
     }
     
     private final int tag;
+    private final String desc;
 
-    public Constant(int tag) {
+    public Constant(int tag, String desc) {
         this.tag = tag;
+        this.desc = desc;
     }
 
     public int getTag() {
