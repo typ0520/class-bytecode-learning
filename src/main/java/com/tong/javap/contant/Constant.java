@@ -1,4 +1,4 @@
-package com.example.cbl.contant;
+package com.tong.javap.contant;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
-package com.example.cbl;
+package com.tong.javap;
 
-import com.example.cbl.contant.Constant;
-import org.fenixsoft.clazz.TestClass;
+import com.tong.javap.contant.Constant;
+
 import java.io.*;
 import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;

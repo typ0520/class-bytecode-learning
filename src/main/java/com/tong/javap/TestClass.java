@@ -1,4 +1,4 @@
-package org.fenixsoft.clazz;
+package com.tong.javap;
 
 import java.io.Serializable;
 
