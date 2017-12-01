@@ -1,5 +1,8 @@
 package com.tong.javap.contant;
 
+import com.tong.javap.contant.level0.*;
+import com.tong.javap.contant.level1.*;
+import com.tong.javap.contant.level2.*;
 import com.tong.javap.utils.ByteCodeStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +33,7 @@ public class ConstantFactory {
     }
 
     public List<Constant> parse(int constantPoolCount,ByteCodeStream stream) {
-        List<Constant> constantList = new ArrayList<Constant>();
+        final List<Constant> constantList = new ArrayList<Constant>();
 
         int index = 1;
         while ((constantPoolCount - 1) > 0) {
@@ -45,14 +48,22 @@ public class ConstantFactory {
             index++;
         }
 
+        int postCount = constantList.size() * 10;
         boolean ready = false;
-        while (!ready) {
+        while (!ready && postCount > 0) {
             ready = true;
             for (Constant constant : constantList) {
                 if (!constant.isReady()) {
                     ready = false;
+                    constant.postHandle(constantList);
                 }
             }
+
+            postCount--;
+        }
+
+        if (postCount <= 0) {
+            throw new IllegalStateException("error");
         }
         return constantList;
     }

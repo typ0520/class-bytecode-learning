@@ -1,5 +1,6 @@
-package com.tong.javap.contant;
+package com.tong.javap.contant.level2;
 
+import com.tong.javap.contant.Constant;
 import com.tong.javap.utils.ByteCodeStream;
 
 import java.util.List;
@@ -20,6 +21,6 @@ public class MethodHandleConstant extends Constant {
 
     @Override
     public void postHandle(List<Constant> constantList) {
-
+        setReady(true);
     }
 }

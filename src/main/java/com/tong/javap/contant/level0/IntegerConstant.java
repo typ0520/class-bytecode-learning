@@ -1,5 +1,6 @@
-package com.tong.javap.contant;
+package com.tong.javap.contant.level0;
 
+import com.tong.javap.contant.Constant;
 import com.tong.javap.utils.ByteCodeStream;
 import java.util.List;
 
@@ -16,10 +17,15 @@ public class IntegerConstant extends Constant {
     @Override
     public void preHandle(ByteCodeStream stream) {
         this.value = stream.readInt();
+        setReady(true);
     }
 
     @Override
     public void postHandle(List<Constant> constantList) {
 
+    }
+
+    public int getValue() {
+        return value;
     }
 }

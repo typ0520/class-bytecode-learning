@@ -1,5 +1,6 @@
-package com.tong.javap.contant;
+package com.tong.javap.contant.level0;
 
+import com.tong.javap.contant.Constant;
 import com.tong.javap.utils.ByteCodeStream;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class FloatConstant extends Constant {
     public void preHandle(ByteCodeStream stream) {
         //byte[] bytes = stream.readBytes(4);
         this.value = Float.intBitsToFloat(stream.readInt());
+        setReady(true);
     }
 
     @Override
