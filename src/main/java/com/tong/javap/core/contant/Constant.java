@@ -1,6 +1,6 @@
-package com.tong.javap.contant;
+package com.tong.javap.core.contant;
 
-import com.tong.javap.utils.ByteCodeStream;
+import com.tong.javap.core.utils.ByteCodeStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

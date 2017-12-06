@@ -1,9 +1,10 @@
-package com.tong.javap.contant;
+package com.tong.javap.core.contant;
 
-import com.tong.javap.contant.level0.*;
-import com.tong.javap.contant.level1.*;
-import com.tong.javap.contant.level2.*;
-import com.tong.javap.utils.ByteCodeStream;
+import com.tong.javap.core.contant.level0.*;
+import com.tong.javap.core.contant.level1.*;
+import com.tong.javap.core.contant.level2.*;
+import com.tong.javap.core.utils.ByteCodeStream;
+import com.tong.javap.core.utils.LogUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ConstantFactory {
 
             Constant constant = createConstant(tag);
             constant.preHandle(stream);
-            System.out.println("#" + index + " = " + constant.getDesc());
+            LogUtil.d("#" + index + " = " + constant.getDesc());
             constantList.add(constant);
 
             constantPoolCount--;

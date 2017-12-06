@@ -1,4 +1,4 @@
-package com.tong.javap.utils;
+package com.tong.javap.core.utils;
 
 import com.tong.javap.MainClass;
 import java.io.ByteArrayOutputStream;

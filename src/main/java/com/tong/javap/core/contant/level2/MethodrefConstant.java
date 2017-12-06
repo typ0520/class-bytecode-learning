@@ -1,6 +1,6 @@
-package com.tong.javap.contant.level2;
+package com.tong.javap.core.contant.level2;
 
-import com.tong.javap.contant.Constant;
+import com.tong.javap.core.contant.Constant;
 
 /**
  * Created by tong on 2017/12/1.

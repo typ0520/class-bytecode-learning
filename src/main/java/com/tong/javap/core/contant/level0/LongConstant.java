@@ -1,17 +1,17 @@
-package com.tong.javap.contant.level0;
+package com.tong.javap.core.contant.level0;
 
-import com.tong.javap.contant.Constant;
-import com.tong.javap.utils.ByteCodeStream;
+import com.tong.javap.core.contant.Constant;
+import com.tong.javap.core.utils.ByteCodeStream;
 import java.util.List;
 
 /**
  * Created by tong on 2017/12/1.
  */
-public class DoubleConstant extends Constant {
-    private double value;
+public class LongConstant extends Constant {
+    private long value;
 
-    public DoubleConstant() {
-        super(Constant.CONSTANT_Double_info, "Double");
+    public LongConstant() {
+        super(Constant.CONSTANT_Long_info, "Long");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DoubleConstant extends Constant {
 
     }
 
-    public double getValue() {
+    public long getValue() {
         return value;
     }
 }
