@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class MainClass {
     public static void main(String[] args) throws Exception {
+        System.out.println(TestClass.class.getAnnotation(TestClassAnno.class));
+
         ByteCodeStream stream = new ByteCodeStream(TestClass.class);
         //正确的魔术是0xcafebabe
         long magicNumber = stream.readUnsignedInt();
@@ -24,7 +26,7 @@ public class MainClass {
         //获取版本信息
         int minorVersion = stream.readUnsignedShort();
         int majorVersion = stream.readUnsignedShort();
-        
+
         LogUtil.d("minor version: " + minorVersion);
         LogUtil.d("major version: " + majorVersion);
 

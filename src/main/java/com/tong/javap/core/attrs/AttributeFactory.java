@@ -26,6 +26,9 @@ public class AttributeFactory {
         ATTRIBUTE_NAME_MAP.put(DeprecatedAttribute.NAME,DeprecatedAttribute.class);
 
         ATTRIBUTE_NAME_MAP.put(RuntimeVisibleAnnotationsAttribute.NAME,RuntimeVisibleAnnotationsAttribute.class);
+        ATTRIBUTE_NAME_MAP.put(RuntimeInvisibleAnnotationsAttribute.NAME,RuntimeInvisibleAnnotationsAttribute.class);
+        ATTRIBUTE_NAME_MAP.put(RuntimeVisibleParameterAnnotationsAttribute.NAME,RuntimeVisibleParameterAnnotationsAttribute.class);
+        ATTRIBUTE_NAME_MAP.put(RuntimeInvisibleParameterAnnotationsAttribute.NAME,RuntimeInvisibleParameterAnnotationsAttribute.class);
     }
 
     public List<Attribute> parse(int attributesCount, ByteCodeStream stream, List<Constant> constantList) {

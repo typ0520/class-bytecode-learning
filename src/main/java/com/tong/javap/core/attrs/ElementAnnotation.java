@@ -1,9 +1,11 @@
 package com.tong.javap.core.attrs;
 
+import com.tong.javap.core.contant.level0.Utf8Constant;
+
 /**
  * Created by tong on 2017/12/7.
  */
-public class ElementValue {
+public class ElementAnnotation {
     //代表byte
     public static final char TAG_BYTE = 'B';
     //代表char
@@ -32,17 +34,24 @@ public class ElementValue {
     //代表array
     public static final char TAG_ARRAY = '[';
 
-    private int tag;
+    private Utf8Constant type;
 
-    public ElementValue() {
+    public ElementAnnotation() {
 
     }
 
-    public int getTag() {
-        return tag;
+    public Utf8Constant getType() {
+        return type;
     }
 
-    public void setTag(int tag) {
-        this.tag = tag;
+    public void setType(Utf8Constant type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "ElementAnnotation{" +
+                "type=" + type +
+                '}';
     }
 }

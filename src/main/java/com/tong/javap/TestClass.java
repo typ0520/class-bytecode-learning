@@ -1,12 +1,12 @@
 package com.tong.javap;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 /**
  * Created by tong on 2017/11/29.
  */
+@TestClassAnno("我是TestClassAnno")
 public final class TestClass implements Serializable,Runnable {
     //public static final long XXX = 100L;
 
@@ -31,7 +31,13 @@ public final class TestClass implements Serializable,Runnable {
         } finally {
             x = 3;
         }
+
+
         return x;
+    }
+
+    public int inc(@TestParamAnno("我是@TestParamAnno a") int a,@TestParamInvisibleAnno("我是@TestParamInvisibleAnno") int b,@TestParamAnno("我是@TestParamAnno c") @TestParam2Anno int c) {
+        return m + a;
     }
 
     @Override
