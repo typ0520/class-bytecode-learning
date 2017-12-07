@@ -28,4 +28,11 @@ public class IntegerConstant extends Constant {
     public int getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "IntegerConstant{" +
+                "value=" + value +
+                '}';
+    }
 }

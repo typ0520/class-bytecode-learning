@@ -12,14 +12,14 @@ import java.util.List;
 public class ConstantValueAttribute extends Attribute {
     public static final String NAME = "ConstantValue";
 
-    private Utf8Constant value;
+    private Constant value;
 
     @Override
     public void preHandle(ByteCodeStream stream,List<Constant> constantList) {
         int constantvalueIndex = stream.readUnsignedShort();
-        this.value = (Utf8Constant) constantList.get(constantvalueIndex - 1);
+        this.value = constantList.get(constantvalueIndex - 1);
 
-        LogUtil.d("ConstantValue: " + value.getValue());
+        LogUtil.d("ConstantValue: " + value);
     }
 
     @Override
@@ -29,5 +29,12 @@ public class ConstantValueAttribute extends Attribute {
 
     public String getValueString() {
         return value.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "ConstantValueAttribute{" +
+                "value=" + value +
+                '}';
     }
 }

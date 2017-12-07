@@ -25,4 +25,11 @@ public class FloatConstant extends Constant {
     public void postHandle(List<Constant> constantList) {
 
     }
+
+    @Override
+    public String toString() {
+        return "FloatConstant{" +
+                "value=" + value +
+                '}';
+    }
 }

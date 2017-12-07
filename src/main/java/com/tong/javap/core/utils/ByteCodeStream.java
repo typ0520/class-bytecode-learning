@@ -73,6 +73,10 @@ public class ByteCodeStream {
         return result;
     }
 
+    public int getOffset() {
+        return offset;
+    }
+
     /**
      * 获取class的字节码
      * @param clazz

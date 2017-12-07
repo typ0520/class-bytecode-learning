@@ -30,4 +30,11 @@ public class DoubleConstant extends Constant {
     public double getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "DoubleConstant{" +
+                "value=" + value +
+                '}';
+    }
 }

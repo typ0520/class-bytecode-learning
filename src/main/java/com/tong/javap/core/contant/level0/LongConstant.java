@@ -30,4 +30,11 @@ public class LongConstant extends Constant {
     public long getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "LongConstant{" +
+                "value=" + value +
+                '}';
+    }
 }

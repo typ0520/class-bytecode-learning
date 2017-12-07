@@ -4,6 +4,7 @@ import com.tong.javap.core.attrs.Attribute;
 import com.tong.javap.core.attrs.AttributeFactory;
 import com.tong.javap.core.contant.Constant;
 import com.tong.javap.core.contant.ConstantFactory;
+import com.tong.javap.core.contant.level0.Utf8Constant;
 import com.tong.javap.core.contant.level1.ClassConstant;
 import com.tong.javap.core.utils.ByteCodeStream;
 import com.tong.javap.core.utils.LogUtil;
@@ -63,27 +64,33 @@ public class MainClass {
             Utils.printlnAccessFlags(fieldAccessFlags);
 
             int nameIndex = stream.readUnsignedShort();
-            LogUtil.d("  field-name: " + constantList.get(nameIndex - 1));
+
+            Utf8Constant name = (Utf8Constant) constantList.get(nameIndex - 1);
+            LogUtil.d("  field-name: " + name);
             int descriptorIndex = stream.readUnsignedShort();
-            LogUtil.d("  field-descriptor: " + constantList.get(descriptorIndex - 1));
+            Utf8Constant descriptor = (Utf8Constant) constantList.get(descriptorIndex - 1);
+            LogUtil.d("  field-descriptor: " + descriptor);
             int attributesCount = stream.readUnsignedShort();
+
             LogUtil.d("  field-attributesCount: " + attributesCount);
 
-//            AttributeFactory fieldAttributeFactory = new AttributeFactory();
-//            fieldAttributeFactory.parse(attributesCount,stream,constantList);
+            AttributeFactory fieldAttributeFactory = new AttributeFactory();
+            fieldAttributeFactory.parse(attributesCount,stream,constantList);
 
-            while (attributesCount > 0) {
-                int attributeNameIndex = stream.readUnsignedShort();
-                long attributeLength = stream.readUnsignedInt();
-
-                LogUtil.d("  field-attribute: " + constantList.get(attributeNameIndex - 1));
-
-                //跳过字段的附加属性
-
-                stream.readBytes((int) attributeLength);
-
-                attributesCount--;
-            }
+//            while (attributesCount > 0) {
+//                int attributeNameIndex = stream.readUnsignedShort();
+//
+//                Utf8Constant attrName = (Utf8Constant) constantList.get(attributeNameIndex - 1);
+//                long attributeLength = stream.readUnsignedInt();
+//
+//                LogUtil.d("  field-attribute: " + constantList.get(attributeNameIndex - 1));
+//
+//                //跳过字段的附加属性
+//
+//                stream.readBytes((int) attributeLength);
+//
+//                attributesCount--;
+//            }
             fieldsCount--;
         }
 
