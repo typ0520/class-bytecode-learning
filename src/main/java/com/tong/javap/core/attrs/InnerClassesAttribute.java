@@ -20,10 +20,20 @@ public class InnerClassesAttribute extends Attribute {
         int classesCount = stream.readUnsignedShort();
 
         while (classesCount > 0) {
-            ClassConstant innerClassInfo = (ClassConstant) constantList.get(stream.readUnsignedShort() - 1);
+            int inner_class_index = stream.readUnsignedShort();
+            ClassConstant innerClassInfo = (ClassConstant) constantList.get(inner_class_index - 1);
             LogUtil.d("innerClassInfo: " + innerClassInfo.getNameString());
-            ClassConstant outerClassInfo = (ClassConstant) constantList.get(stream.readUnsignedShort() - 1);
-            LogUtil.d("outerClassInfo: " + outerClassInfo.getNameString());
+
+            int outer_class_index = stream.readUnsignedShort();
+
+            if (outer_class_index == 0) {
+                LogUtil.d("outerClassInfo: " + null);
+            }
+            else {
+                ClassConstant outerClassInfo = (ClassConstant) constantList.get(outer_class_index - 1);
+                LogUtil.d("outerClassInfo: " + outerClassInfo.getNameString());
+            }
+
             Utf8Constant innerName = (Utf8Constant) constantList.get(stream.readUnsignedShort() - 1);
             LogUtil.d("innerName: " + innerName);
             int innerClassAccessFlags = stream.readUnsignedShort();

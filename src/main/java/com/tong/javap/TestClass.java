@@ -17,6 +17,8 @@ public final class TestClass implements Serializable,Runnable {
     private final int m2 = 3;
     private final Integer m3 = 4;
 
+    private int m4;
+
     public int inc() {
         return m + 1;
     }
@@ -42,7 +44,9 @@ public final class TestClass implements Serializable,Runnable {
 
     @Override
     public void run() {
+        class EncloseingClass {
 
+        }
     }
 
     private static class Test2 {
