@@ -57,6 +57,8 @@ public class AttributeFactory {
                 LogUtil.d("attributeName: " + attribute.getName());
                 LogUtil.d(attribute);
 
+                attributeList.add(attribute);
+
             }
             attributesCount--;
         }

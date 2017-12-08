@@ -26,4 +26,8 @@ public class SourceFileAttribute extends Attribute {
     public void postHandle(List<Constant> constantList) {
 
     }
+
+    public Utf8Constant getSourcefile() {
+        return sourcefile;
+    }
 }

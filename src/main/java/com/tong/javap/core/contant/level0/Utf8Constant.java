@@ -2,6 +2,7 @@ package com.tong.javap.core.contant.level0;
 
 import com.tong.javap.core.contant.Constant;
 import com.tong.javap.core.utils.ByteCodeStream;
+import com.tong.javap.core.utils.LogUtil;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class Utf8Constant extends Constant {
         this.value = new String(stream.readBytes(length));
 
         setReady(true);
-        System.out.println("  读取到了字符串常量: " + value);
+        LogUtil.d("  读取到了字符串常量: " + value);
     }
 
     @Override
