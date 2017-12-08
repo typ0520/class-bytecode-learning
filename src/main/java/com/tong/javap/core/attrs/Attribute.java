@@ -11,9 +11,9 @@ import java.util.List;
 public abstract class Attribute {
     private boolean ready;
 
-    private Utf8Constant name;
+    protected Utf8Constant name;
 
-    private long length;
+    protected long length;
 
     public Utf8Constant getName() {
         return name;

@@ -17,6 +17,7 @@ public class AttributeFactory {
 
     static {
         ATTRIBUTE_NAME_MAP.put(ConstantValueAttribute.NAME,ConstantValueAttribute.class);
+        ATTRIBUTE_NAME_MAP.put(CodeAttribute.NAME,CodeAttribute.class);
         //StackMap
         ATTRIBUTE_NAME_MAP.put(ExceptionsAttribute.NAME,ExceptionsAttribute.class);
         ATTRIBUTE_NAME_MAP.put(InnerClassesAttribute.NAME,InnerClassesAttribute.class);
@@ -24,7 +25,7 @@ public class AttributeFactory {
         //Synthetic
         ATTRIBUTE_NAME_MAP.put(SignatureAttribute.NAME,SignatureAttribute.class);
         ATTRIBUTE_NAME_MAP.put(SourceFileAttribute.NAME,SourceFileAttribute.class);
-        //SourceDebugExtension
+        ATTRIBUTE_NAME_MAP.put(SourceDebugExtensionAttribute.NAME,SourceDebugExtensionAttribute.class);
         //LineNumberTable
         //LocalVariableTable
         //LocalVariableTypeTable

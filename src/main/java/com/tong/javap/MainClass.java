@@ -9,7 +9,6 @@ import com.tong.javap.core.contant.level1.ClassConstant;
 import com.tong.javap.core.utils.ByteCodeStream;
 import com.tong.javap.core.utils.LogUtil;
 import com.tong.javap.core.utils.Utils;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ import java.util.List;
 public class MainClass {
     public static void main(String[] args) throws Exception {
         Class clazz = Class.forName("com.tong.javap.TestClass$1EncloseingClass");
-        ByteCodeStream stream = new ByteCodeStream(new File("/Users/tong/Projects/class-bytecode-learning/build/classes/main/fastdex/build/FastdexPlugin.class"));
+        ByteCodeStream stream = new ByteCodeStream(TestClass.class);
         //正确的魔术是0xcafebabe
         long magicNumber = stream.readUnsignedInt();
         LogUtil.d("获取到魔数: " + Long.toHexString(magicNumber));

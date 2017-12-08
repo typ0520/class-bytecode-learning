@@ -12,6 +12,10 @@ import java.util.List;
 public final class TestClass implements Serializable,Runnable {
     //public static final long XXX = 100L;
 
+    static {
+        System.out.println("static{}");
+    }
+
     private static volatile int m;
     @Deprecated
     @SerializedName("xx")
