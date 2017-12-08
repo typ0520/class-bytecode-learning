@@ -1,10 +1,7 @@
 package com.tong.javap.core.utils;
 
 import com.tong.javap.MainClass;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -19,6 +16,22 @@ public class ByteCodeStream {
         try {
             this.buffer = getClassBytes(clazz);
         } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ByteCodeStream(File file) {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            FileInputStream fis = new FileInputStream(file);
+            int len = -1;
+            byte[] array = new byte[1024];
+
+            while ((len = fis.read(array)) != -1) {
+                bos.write(array,0,len);
+            }
+            this.buffer = bos.toByteArray();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

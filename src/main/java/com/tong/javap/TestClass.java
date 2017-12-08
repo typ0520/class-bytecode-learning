@@ -2,6 +2,8 @@ package com.tong.javap;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tong on 2017/11/29.
@@ -18,6 +20,8 @@ public final class TestClass implements Serializable,Runnable {
     private final Integer m3 = 4;
 
     private int m4;
+
+    private List list = new ArrayList();
 
     public int inc() {
         return m + 1;

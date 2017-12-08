@@ -17,18 +17,24 @@ public class AttributeFactory {
 
     static {
         ATTRIBUTE_NAME_MAP.put(ConstantValueAttribute.NAME,ConstantValueAttribute.class);
-
+        //StackMap
         ATTRIBUTE_NAME_MAP.put(ExceptionsAttribute.NAME,ExceptionsAttribute.class);
         ATTRIBUTE_NAME_MAP.put(InnerClassesAttribute.NAME,InnerClassesAttribute.class);
-
+        ATTRIBUTE_NAME_MAP.put(EnclosingMethodAttribute.NAME,EnclosingMethodAttribute.class);
+        //Synthetic
+        ATTRIBUTE_NAME_MAP.put(SignatureAttribute.NAME,SignatureAttribute.class);
         ATTRIBUTE_NAME_MAP.put(SourceFileAttribute.NAME,SourceFileAttribute.class);
-
+        //SourceDebugExtension
+        //LineNumberTable
+        //LocalVariableTable
+        //LocalVariableTypeTable
         ATTRIBUTE_NAME_MAP.put(DeprecatedAttribute.NAME,DeprecatedAttribute.class);
-
         ATTRIBUTE_NAME_MAP.put(RuntimeVisibleAnnotationsAttribute.NAME,RuntimeVisibleAnnotationsAttribute.class);
         ATTRIBUTE_NAME_MAP.put(RuntimeInvisibleAnnotationsAttribute.NAME,RuntimeInvisibleAnnotationsAttribute.class);
         ATTRIBUTE_NAME_MAP.put(RuntimeVisibleParameterAnnotationsAttribute.NAME,RuntimeVisibleParameterAnnotationsAttribute.class);
         ATTRIBUTE_NAME_MAP.put(RuntimeInvisibleParameterAnnotationsAttribute.NAME,RuntimeInvisibleParameterAnnotationsAttribute.class);
+        ATTRIBUTE_NAME_MAP.put(AnnotationDefaultAttribute.NAME,AnnotationDefaultAttribute.class);
+        //BootstrapMethods
     }
 
     public List<Attribute> parse(int attributesCount, ByteCodeStream stream, List<Constant> constantList) {
@@ -38,7 +44,8 @@ public class AttributeFactory {
             int attributeNameIndex = stream.readUnsignedShort();
             long attributeLength = stream.readUnsignedInt();
 
-            Attribute attribute = createAttribute((Utf8Constant) constantList.get(attributeNameIndex - 1),attributeLength);
+            Utf8Constant attrName = (Utf8Constant) constantList.get(attributeNameIndex - 1);
+            Attribute attribute = createAttribute(attrName,attributeLength);
             if (attribute == null) {
                 stream.readBytes((int) attributeLength);
 

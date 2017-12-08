@@ -9,6 +9,7 @@ import com.tong.javap.core.contant.level1.ClassConstant;
 import com.tong.javap.core.utils.ByteCodeStream;
 import com.tong.javap.core.utils.LogUtil;
 import com.tong.javap.core.utils.Utils;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -16,9 +17,8 @@ import java.util.List;
  */
 public class MainClass {
     public static void main(String[] args) throws Exception {
-        System.out.println(TestClass.class.getAnnotation(TestClassAnno.class));
-
-        ByteCodeStream stream = new ByteCodeStream(TestClass.class);
+        Class clazz = Class.forName("com.tong.javap.TestClass$1EncloseingClass");
+        ByteCodeStream stream = new ByteCodeStream(new File("/Users/tong/Projects/class-bytecode-learning/build/classes/main/fastdex/build/FastdexPlugin.class"));
         //正确的魔术是0xcafebabe
         long magicNumber = stream.readUnsignedInt();
         LogUtil.d("获取到魔数: " + Long.toHexString(magicNumber));
@@ -53,8 +53,9 @@ public class MainClass {
         LogUtil.d("interfacesCount: " + interfacesCount);
 
         while (interfacesCount > 0) {
-            int classInfoIndex = stream.readUnsignedShort();
+            int class_info_index = stream.readUnsignedShort();
 
+            ClassConstant class_info = (ClassConstant) constantList.get(class_info_index - 1);
             interfacesCount--;
         }
 

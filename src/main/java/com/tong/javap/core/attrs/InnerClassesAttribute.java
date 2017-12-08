@@ -17,29 +17,37 @@ public class InnerClassesAttribute extends Attribute {
 
     @Override
     public void preHandle(ByteCodeStream stream,List<Constant> constantList) {
-        int classesCount = stream.readUnsignedShort();
+        int number_of_classes = stream.readUnsignedShort();
 
-        while (classesCount > 0) {
-            int inner_class_index = stream.readUnsignedShort();
-            ClassConstant innerClassInfo = (ClassConstant) constantList.get(inner_class_index - 1);
-            LogUtil.d("innerClassInfo: " + innerClassInfo.getNameString());
+        while (number_of_classes > 0) {
+            int inner_class_info_index = stream.readUnsignedShort();
+            ClassConstant inner_class_info = (ClassConstant) constantList.get(inner_class_info_index - 1);
+            LogUtil.d("inner_class_info: " + inner_class_info.getNameString());
 
-            int outer_class_index = stream.readUnsignedShort();
+            int outer_class_info_index = stream.readUnsignedShort();
 
-            if (outer_class_index == 0) {
+            if (outer_class_info_index == 0) {
                 LogUtil.d("outerClassInfo: " + null);
             }
             else {
-                ClassConstant outerClassInfo = (ClassConstant) constantList.get(outer_class_index - 1);
-                LogUtil.d("outerClassInfo: " + outerClassInfo.getNameString());
+                ClassConstant outer_class_info = (ClassConstant) constantList.get(outer_class_info_index - 1);
+                LogUtil.d("outer_class_info: " + outer_class_info.getNameString());
             }
 
-            Utf8Constant innerName = (Utf8Constant) constantList.get(stream.readUnsignedShort() - 1);
-            LogUtil.d("innerName: " + innerName);
+            int inner_name_index = stream.readUnsignedShort();
+
+            if (inner_name_index == 0) {
+                LogUtil.d("innerName: " + null);
+            }
+            else {
+                Utf8Constant innerName = (Utf8Constant) constantList.get(inner_name_index - 1);
+                LogUtil.d("innerName: " + innerName);
+            }
+
             int innerClassAccessFlags = stream.readUnsignedShort();
 
             Utils.printlnAccessFlags(innerClassAccessFlags);
-            classesCount--;
+            number_of_classes--;
         }
     }
 
