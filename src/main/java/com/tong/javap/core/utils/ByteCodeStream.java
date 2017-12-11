@@ -74,6 +74,21 @@ public class ByteCodeStream {
         return result;
     }
 
+    public long readLong() {
+        long result =  (((long)buffer[offset] << 56) +
+                ((long)(buffer[offset + 1] & 255) << 48) +
+                ((long)(buffer[offset + 2] & 255) << 40) +
+                ((long)(buffer[offset + 3] & 255) << 32) +
+                ((long)(buffer[offset + 4] & 255) << 24) +
+                ((buffer[offset + 5] & 255) << 16) +
+                ((buffer[offset + 6] & 255) <<  8) +
+                ((buffer[offset + 7] & 255) <<  0));
+
+        offset += 8;
+        return result;
+    }
+
+
     /**
      * 读取字节数组
      * @param length

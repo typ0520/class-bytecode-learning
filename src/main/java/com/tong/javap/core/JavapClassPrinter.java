@@ -1,7 +1,15 @@
 package com.tong.javap.core;
 
-import com.tong.javap.core.attrs.Attribute;
-import com.tong.javap.core.attrs.SourceFileAttribute;
+import com.tong.javap.core.attrs.*;
+import com.tong.javap.core.contant.Constant;
+import com.tong.javap.core.contant.level0.Utf8Constant;
+import com.tong.javap.core.contant.level0.ValueConstant;
+import com.tong.javap.core.contant.level1.ClassConstant;
+import com.tong.javap.core.contant.level1.NameAndTypeConstant;
+import com.tong.javap.core.contant.level1.StringConstant;
+import com.tong.javap.core.contant.level2.BaseClassNameAndTypeConstant;
+import com.tong.javap.core.contant.level2.MethodrefConstant;
+
 import java.lang.reflect.Modifier;
 import java.util.List;
 
@@ -27,7 +35,80 @@ public class JavapClassPrinter {
         sb.append("  major version: " + classFile.getMajorVersion());
         sb.append("\n");
         sb.append("  flags: " + getFlags(classFile.getAccessFlags()));
+        sb.append("\n");
+        sb.append("Constant pool: \n");
 
+        for (int i = 0; i < classFile.getConstants().size(); i++) {
+            Constant constant = classFile.getConstants().get(i);
+            sb.append("  #" + (i + 1));
+            sb.append(" = ");
+            sb.append(constant.getDesc());
+            sb.append("  ");
+
+            if (constant instanceof Utf8Constant) {
+                sb.append("  " + constant.toString());
+            }
+            else if (constant instanceof NameAndTypeConstant) {
+                NameAndTypeConstant nameAndTypeConstant = (NameAndTypeConstant) constant;
+                sb.append("#" + nameAndTypeConstant.getNameIndex());
+                sb.append(":#" + nameAndTypeConstant.getDescriptorIndex());
+                sb.append("    // ");
+                sb.append(nameAndTypeConstant.getNameString());
+                sb.append(":");
+                sb.append(nameAndTypeConstant.getDescriptorString());
+            }
+            else if (constant instanceof ClassConstant) {
+                sb.append("#" + ((ClassConstant) constant).getNameIndex());
+                sb.append("    // ");
+                sb.append(((ClassConstant) constant).getNameString());
+            }
+            else if (constant instanceof BaseClassNameAndTypeConstant) {
+                BaseClassNameAndTypeConstant baseClassNameAndTypeConstant = (BaseClassNameAndTypeConstant) constant;
+                sb.append("#" +  baseClassNameAndTypeConstant.getClassIndex());
+                sb.append(".");
+                sb.append(baseClassNameAndTypeConstant.getNameAndTypeIndex());
+                sb.append("    // ");
+                sb.append(baseClassNameAndTypeConstant.getClazz().getNameString() + ".");
+                sb.append("\"" + baseClassNameAndTypeConstant.getNameAndType().getNameString() + "\":");
+                sb.append(baseClassNameAndTypeConstant.getNameAndType().getDescriptorString());
+            }
+            else if (constant instanceof StringConstant) {
+                sb.append("#" + ((StringConstant) constant).getStringIndex());
+                sb.append("    // ");
+                sb.append(((StringConstant) constant).getValueString());
+            }
+            else if (constant instanceof ValueConstant) {
+                sb.append("  " + ((ValueConstant) constant).getValue());
+            }
+            sb.append("\n");
+        }
+
+        for (Attribute attribute : classFile.getAttributes()) {
+            sb.append(attribute.getName() + ": ");
+
+            if (attribute instanceof SignatureAttribute) {
+                sb.append("#" + ((SignatureAttribute) attribute).getSignatureIndex());
+                sb.append("    // ");
+                sb.append(attribute.getName().getValue());
+            }
+            else if (attribute instanceof SourceFileAttribute) {
+                sb.append("\"" + ((SourceFileAttribute) attribute).getSourcefile().getValue() + "\"");
+            }
+            else if (attribute instanceof BaseAnnotationsAttribute) {
+                sb.append("\n");
+
+                BaseAnnotationsAttribute baseAnnotationsAttribute = (BaseAnnotationsAttribute) attribute;
+                for (int i = 0; i < baseAnnotationsAttribute.getElementAnnotations().size(); i++) {
+                    ElementAnnotation elementAnnotation = baseAnnotationsAttribute.getElementAnnotations().get(i);
+                    sb.append("  " + (i + 0) + ": #" + elementAnnotation.getTypeIndex());
+                }
+            }
+            else if (attribute instanceof InnerClassesAttribute) {
+
+            }
+
+            sb.append("\n");
+        }
         System.out.println(sb.toString());
     }
 
@@ -54,8 +135,8 @@ public class JavapClassPrinter {
         if (Modifier.isPrivate(accessFlags)) {
             sb.append(" private");
         }
-        if (Modifier.is(accessFlags)) {
-            sb.append(" private");
+        if (Modifier.isStatic(accessFlags)) {
+            sb.append(" static");
         }
         if (Modifier.isFinal(accessFlags)) {
             sb.append(" final");
@@ -82,8 +163,21 @@ public class JavapClassPrinter {
             sb.append(" ACC_FINAL");
         }
         if (Modifier.isAbstract(accessFlags)) {
-            sb.append(" abstract");
+            sb.append(" ACC_ABSTRACT");
         }
+        if ((accessFlags & ClassFile.ACC_SUPER) != 0) {
+            sb.append(" ACC_SUPER");
+        }
+        if ((accessFlags & ClassFile.ACC_INTERFACE) != 0) {
+            sb.append(" ACC_INTERFACE");
+        }
+        if ((accessFlags & ClassFile.ACC_ENUM) != 0) {
+            sb.append(" ACC_ENUM");
+        }
+        if ((accessFlags & ClassFile.ACC_SYNTHETIC) != 0) {
+            sb.append(" ACC_SYNTHETIC");
+        }
+
         sb.deleteCharAt(0);
         return sb.toString();
     }

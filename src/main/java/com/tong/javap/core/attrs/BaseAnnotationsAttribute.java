@@ -21,6 +21,7 @@ public abstract class BaseAnnotationsAttribute extends Attribute {
         LogUtil.d(" type: " + type);
 
         ElementAnnotation elementAnnotation = new ElementAnnotation();
+        elementAnnotation.setTypeIndex(type_index);
         elementAnnotation.setType(type);
 
         int num_element_value_pairs = stream.readUnsignedShort();

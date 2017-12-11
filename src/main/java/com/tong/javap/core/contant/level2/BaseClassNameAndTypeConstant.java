@@ -34,6 +34,14 @@ public class BaseClassNameAndTypeConstant extends Constant {
         setReady(true);
     }
 
+    public int getClassIndex() {
+        return classIndex;
+    }
+
+    public int getNameAndTypeIndex() {
+        return nameAndTypeIndex;
+    }
+
     public ClassConstant getClazz() {
         return clazz;
     }

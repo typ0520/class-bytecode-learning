@@ -2,12 +2,11 @@ package com.tong.javap.core.contant.level0;
 
 import com.tong.javap.core.contant.Constant;
 import com.tong.javap.core.utils.ByteCodeStream;
-import java.util.List;
 
 /**
  * Created by tong on 2017/12/1.
  */
-public class DoubleConstant extends Constant {
+public class DoubleConstant extends ValueConstant<Double> {
     private double value;
 
     public DoubleConstant() {
@@ -16,25 +15,10 @@ public class DoubleConstant extends Constant {
 
     @Override
     public void preHandle(ByteCodeStream stream) {
-        byte[] highBytes = stream.readBytes(4);
-        byte[] lowBytes = stream.readBytes(4);
+//        byte[] highBytes = stream.readBytes(4);
+//        byte[] lowBytes = stream.readBytes(4);
 
+        this.value = Double.longBitsToDouble(stream.readLong());
         setReady(true);
-    }
-
-    @Override
-    public void postHandle(List<Constant> constantList) {
-
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return "DoubleConstant{" +
-                "value=" + value +
-                '}';
     }
 }

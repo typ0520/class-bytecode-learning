@@ -31,6 +31,10 @@ public class ClassConstant extends Constant {
         LogUtil.d("  className: " + getNameString());
     }
 
+    public int getNameIndex() {
+        return nameIndex;
+    }
+
     public Utf8Constant getName() {
         return name;
     }

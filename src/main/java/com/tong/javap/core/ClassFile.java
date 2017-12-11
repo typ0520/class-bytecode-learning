@@ -16,6 +16,11 @@ import java.util.List;
  * Created by tong on 2017/12/8.
  */
 public class ClassFile {
+
+    /**
+     * 当用到invokespecial指令时，需要特殊处理的父类方法。
+     */
+    public static final int ACC_SUPER = 0x0020;
     /**
      * 标识定义的是接口而不是类
      */
@@ -28,6 +33,10 @@ public class ClassFile {
      * 标识枚举类型
      */
     public static final int ACC_ENUM = 0x4000;
+    /**
+     * 标识并非Java源码生成的代码
+     */
+    public static final int ACC_SYNTHETIC = 0x1000;
 
     /**
      * 魔数

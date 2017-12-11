@@ -33,6 +33,14 @@ public class NameAndTypeConstant extends Constant {
         setReady(true);
     }
 
+    public int getNameIndex() {
+        return nameIndex;
+    }
+
+    public int getDescriptorIndex() {
+        return descriptorIndex;
+    }
+
     public Utf8Constant getName() {
         return name;
     }

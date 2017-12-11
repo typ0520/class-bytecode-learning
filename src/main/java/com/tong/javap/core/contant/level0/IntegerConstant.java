@@ -2,14 +2,11 @@ package com.tong.javap.core.contant.level0;
 
 import com.tong.javap.core.contant.Constant;
 import com.tong.javap.core.utils.ByteCodeStream;
-import java.util.List;
 
 /**
  * Created by tong on 2017/12/1.
  */
-public class IntegerConstant extends Constant {
-    private int value;
-
+public class IntegerConstant extends ValueConstant<Integer> {
     public IntegerConstant() {
         super(Constant.CONSTANT_Integer_info, "Integer");
     }
@@ -18,21 +15,5 @@ public class IntegerConstant extends Constant {
     public void preHandle(ByteCodeStream stream) {
         this.value = stream.readInt();
         setReady(true);
-    }
-
-    @Override
-    public void postHandle(List<Constant> constantList) {
-
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return "IntegerConstant{" +
-                "value=" + value +
-                '}';
     }
 }

@@ -12,18 +12,27 @@ import java.util.List;
 public class SignatureAttribute extends Attribute {
     public static final String NAME = "Signature";
 
+    private int signatureIndex;
     private Utf8Constant signature;
 
     @Override
     public void preHandle(ByteCodeStream stream,List<Constant> constantList) {
-        int signature_index = stream.readUnsignedShort();
+        signatureIndex = stream.readUnsignedShort();
 
-        signature = (Utf8Constant) constantList.get(signature_index - 1);
+        signature = (Utf8Constant) constantList.get(signatureIndex - 1);
         LogUtil.d(" signature: " + signature);
     }
 
     @Override
     public void postHandle(List<Constant> constantList) {
 
+    }
+
+    public int getSignatureIndex() {
+        return signatureIndex;
+    }
+
+    public Utf8Constant getSignature() {
+        return signature;
     }
 }

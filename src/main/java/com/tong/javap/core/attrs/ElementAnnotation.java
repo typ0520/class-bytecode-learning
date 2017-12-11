@@ -34,10 +34,20 @@ public class ElementAnnotation {
     //代表array
     public static final char TAG_ARRAY = '[';
 
+    private int typeIndex;
+
     private Utf8Constant type;
 
     public ElementAnnotation() {
 
+    }
+
+    public int getTypeIndex() {
+        return typeIndex;
+    }
+
+    public void setTypeIndex(int typeIndex) {
+        this.typeIndex = typeIndex;
     }
 
     public Utf8Constant getType() {

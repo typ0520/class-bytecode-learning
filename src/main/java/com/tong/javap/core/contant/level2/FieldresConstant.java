@@ -7,6 +7,6 @@ import com.tong.javap.core.contant.Constant;
  */
 public class FieldresConstant extends BaseClassNameAndTypeConstant {
     public FieldresConstant() {
-        super(Constant.CONSTANT_Fieldres_info, "Integer");
+        super(Constant.CONSTANT_Fieldres_info, "Fieldres");
     }
 }

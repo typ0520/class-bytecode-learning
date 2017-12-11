@@ -9,7 +9,7 @@ import java.util.List;
  * Created by tong on 2017/11/29.
  */
 @TestClassAnno("我是TestClassAnno")
-public final class TestClass implements Serializable,Runnable {
+public final class TestClass<T> implements Serializable,Runnable {
     //public static final long XXX = 100L;
 
     static {

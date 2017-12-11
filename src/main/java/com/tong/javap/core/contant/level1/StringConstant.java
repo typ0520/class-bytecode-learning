@@ -28,6 +28,10 @@ public class StringConstant extends Constant {
         setReady(true);
     }
 
+    public int getStringIndex() {
+        return stringIndex;
+    }
+
     public Utf8Constant getValue() {
         return value;
     }
